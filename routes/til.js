@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 /* GET til listing. */
-
+var indexTitle = "Today I Learned...";
 var til = [
   {slug:"Express is cool", body:"it can dynamically create pages based on get and post to routes", creationDate:"Today"},
   {slug:"More about javascript", body:"key value pairs can be used to pass a collection of data of any type", creationDate:"Forever ago"}
@@ -10,7 +10,7 @@ var til = [
 
 //get portion of create
 router.get('/', function(req, res, next){
-  res.render('til/index', { title:'Today I Learned',til:til});
+  res.render('til/index', { title:indexTitle,til:til});
 
 });
 
@@ -18,21 +18,22 @@ router.get('/', function(req, res, next){
 router.post('/', function(req, res, next){
     console.log(res.body);
     til.push(req.body); //push the body of the request onto the til array
-    res.render('til/index', {title: 'Today I Learned', til:til});
+    res.render('til/index', {title: indexTitle, til:til});
 });
 
 
 router.get('/create', function(req, res, next){
-  res.render('til/create', {title:'Create New Fact'});
+  res.render('til/create', {title:'Create New Fact', til: til});
 });
 
 //get data to populate update form
 router.get('/:id/update', function(req, res, next){
-  console.log("Get update");
+
   res.render('til/update', {
-    title: "Update " + til[req.params.id].title,
+    title: "Update " + til[req.params.id].slug,
     id: req.params.id,
-    til: til[req.params.id]
+    til: til,
+    tilEntry: til[req.params.id]
   });
 });
 
@@ -46,11 +47,11 @@ router.post('/:id', function(req,res,next){
 router.get("/:id/delete", function(req,res,next){
   var id = req.params.id;
   til = til.slice(0,id).concat(til.slice(id+1,til.length));
-  res.render("til/index", {title: "Today I Learned", til: til});
+  res.render("til/index", {title: indexTitle, til: til});
 });
 
 //display an entry
 router.get("/:id", function(req, res, next){
-    res.render('til/til', {title: "View", til: til[req.params.id]})
+    res.render('til/til', {title: "",tilEntry: til[req.params.id], til:til})
 } );
 module.exports = router;

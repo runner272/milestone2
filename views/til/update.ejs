@@ -1,15 +1,15 @@
 <% include ../head %>
-
+<h1><%=title%></h1>
 <form action="/til/<%=id%>" method="POST">
   <label name ="slug">Slug</label>
 </br>
-  <input type="text" name="slug" value="<%= til.slug%>">
+  <input type="text" name="slug" value="<%= tilEntry.slug%>">
 
 
 </br>
   <label name="body">Fact:</label>
 </br>
-  <input type='text' name="body" value="<%= til.body %>">
+  <input type='text' name="body" value="<%= tilEntry.body %>">
 </br>
   <input type="submit">
 
