@@ -1,2 +1,17 @@
+<% include ../head %>
 <h1><%= title %></h1>
-<p>Welcome to <%= title %></p>
+<h3>All Entries</h3>
+<p>
+  <ul>
+
+    <% for(var i = 0; i<til.length; i++){ %>
+      <li><a href="/til/<%=i%>"><%= til[i].slug%></a>
+       <a href = "/til/<%=i%>/update"> Edit </a>
+       <a href ="/til/<%=i%>/delete"> Delete </a>
+     </li>
+   <%}%>
+  </ul>
+
+</p>
+<h2><a href="/til/create"> Create New </a></h2>
+<% include ../footer %>
