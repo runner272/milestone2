@@ -1,13 +1,12 @@
-<% include ../head %>
-<%include ./tilnavbar %>
+<% include ./tilhead %>
 
 <h1><%=title%></h1>
 
 <section id="fact">
-   <h2><%= til[id].slug%></h2>
-   <p><%= til[id].body%></p>
+   <h2><%= til_entry.slug%></h2>
+   <p><%= til_entry.body%></p>
 </section>
 <div id="date">
-  <p><b><%= til[id].creationDate%></b></p>
+  <p><b><%= til_entry.creationDate%></b></p>
 </div>
 <% include ../footer %>

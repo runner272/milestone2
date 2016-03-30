@@ -1,16 +1,16 @@
-<% include ../head %>
-<%include ./tilnavbar %>
+<% include ./tilhead %>
 <h1><%=title%></h1>
 <form action="/til/<%=id%>" method="POST">
   <label name ="slug">Slug</label>
 </br>
-  <input type="text" name="slug" value="<%= til[id].slug%>">
+
+  <input type="text" name="slug" value="<%= til_entry.slug %>">
 
 
 </br>
   <label name="body">Fact:</label>
 </br>
-  <input type='text' name="body" value="<%= til[id].body %>">
+  <input type='text' name="body" value="<%= til_entry.body %>">
 </br>
   <input type="submit">
 
