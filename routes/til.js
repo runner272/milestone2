@@ -110,12 +110,10 @@ router.get('/:id/update', function(req, res, next) {
 
 //post data from update
 router.post('/:id', function(req, res, next) {
-  console.log("POSTING!!!!!");
   //til[req.params.id] = req.body;
   //console.log("Body ''" + req.body.body + "'");
   //console.log("Slug '" + req.body.slug + "'");
   var query = "UPDATE til SET slug=? , body=? WHERE id=?;";
-  console.log("Request: " + query);
   req.db.driver.execQuery(query, [req.body.slug, req.body.body, parseInt(req.params.id)],
 
     function(err, data) {
@@ -178,6 +176,9 @@ router.get("/:id", function(req, res, next) {
     function(err, data) {
       if (err) {
         console.log(err);
+      }
+      if(data.lenth === 0){
+        console.log("No DATA FOUND!");
       }
       render(req,res,'til/til',{
         title: "",
