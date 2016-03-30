@@ -6,7 +6,7 @@
   <ul>
 
     <% for(var i = 0; i<til.length; i++){ %>
-      <li><a href="/til/<%=i%>"><%= til[i].slug%></a>
+      <li><a href="/til/<%=til[i].id%>"><%= til[i].slug%></a>
        <a href = "/til/<%=til[i].id%>/update"> Edit </a>
        <a href ="/til/<%=til[i].id%>/delete"> Delete </a>
      </li>

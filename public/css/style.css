@@ -60,6 +60,8 @@ nav{
   margin:0;
   padding:0;
   list-style: none;
+  min-height: 100%;
+
 }
 .linkbutton{
   display: block;
@@ -68,6 +70,7 @@ nav{
 
   padding: 8px 0px 8px 16px;
   width: 100%;
+
   text-align: center;
   display: inline-block;
   text-decoration: none;

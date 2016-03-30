@@ -19,11 +19,8 @@ function render(request, response, route, vars) {
       if (err) {
         console.log(err);
       }
-      console.log(data);
       vars['name'] = name;
       vars['til'] = data;
-      console.log(vars.til);
-      //console.log(Object.getOwnPropertyNames(vars));
       response.render(route, vars);
     }
   );
@@ -43,7 +40,7 @@ router.get('/', function(req, res, next) {
 //post portion of create
 router.post('/', function(req, res, next) {
   req.db.driver.execQuery(
-    "INSERT INTO til (slug,body) VALUES (?,?);", [req.body.slug, req.body.body],
+    "INSERT INTO til (slug,body,created_at) VALUES (?,?,now());", [req.body.slug, req.body.body],
     function(err, data) {
       if (err) {
         console.log(err);
@@ -110,9 +107,7 @@ router.get('/:id/update', function(req, res, next) {
 
 //post data from update
 router.post('/:id', function(req, res, next) {
-  //til[req.params.id] = req.body;
-  //console.log("Body ''" + req.body.body + "'");
-  //console.log("Slug '" + req.body.slug + "'");
+
   var query = "UPDATE til SET slug=? , body=? WHERE id=?;";
   req.db.driver.execQuery(query, [req.body.slug, req.body.body, parseInt(req.params.id)],
 
@@ -123,22 +118,7 @@ router.post('/:id', function(req, res, next) {
 
        res.redirect(303,'/til/' + parseInt(req.params.id));
     });
-    //render(req, res, 'til/index', {
-    //  title: indexTitle
-    //});
 
-  /*req.db.driver.execQuery("SELECT * FROM til;",
-    function(err, data) {
-      if (err) {
-        console.log(err);
-      }
-      res.render('til/index', {
-        title: indexTitle,
-        til: data
-      });
-
-    }
-  );*/
 });
 
 //delete an entry
@@ -155,17 +135,7 @@ router.get("/:id/delete", function(req, res, next) {
     }
 
   );
-  /*req.db.driver.execQuery("SELECT * FROM til;",
-    function(err, data) {
-      if (err) {
-        console.log(err);
-      }
-      res.render('til/index', {
-        title: indexTitle,
-        til: data
-      });
 
-    });*/
 });
 
 //display an entry
@@ -177,9 +147,7 @@ router.get("/:id", function(req, res, next) {
       if (err) {
         console.log(err);
       }
-      if(data.lenth === 0){
-        console.log("No DATA FOUND!");
-      }
+
       render(req,res,'til/til',{
         title: "",
         id: req.params.id,
